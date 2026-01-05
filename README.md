@@ -84,7 +84,7 @@ TrendTrove is a full-stack E-Commerce application built with React.js, Node.js, 
    ```
    
 3. **Configure Environment Variables:**
-   Create a `config/config.env` file in the `Backend` directory with the following keys:
+   Create a `.env` file in the `Frontend` directory with the following key:
    ```env
    VITE_BACKEND_URL=http://localhost:5000
 
