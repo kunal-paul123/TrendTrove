@@ -20,15 +20,6 @@ TrendTrove is a full-stack E-Commerce application built with React.js, Node.js, 
 - **Payment Gateway**: Razorpay
 - **Image Storage**: Cloudinary
 
-## Installation & Setup
-
-### Prerequisites
-
-- Node.js installed
-- MongoDB installed or a MongoDB Atlas URI
-- Cloudinary Account
-- Razorpay Account
-
 ### Backend Setup
 
 1. **Navigate to the Backend directory:**
