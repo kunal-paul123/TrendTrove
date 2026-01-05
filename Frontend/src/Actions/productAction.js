@@ -42,7 +42,9 @@ export const getProducts =
         link = `${backendURL}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
       }
 
-      const { data } = await axios.get(link);
+      const { data } = await axios.get(link, {
+        withCredentials: true,
+      });
 
       dispatch({
         type: ALL_PRODUCT_SUCCESS,
@@ -61,7 +63,9 @@ export const getAdminProducts = () => async (dispatch) => {
   try {
     dispatch({ type: ADMIN_PRODUCT_REQUESTS });
 
-    const { data } = await axios.get(`${backendURL}/api/v1/admin/products`);
+    const { data } = await axios.get(`${backendURL}/api/v1/admin/products`, {
+      withCredentials: true,
+    });
 
     dispatch({ type: ADMIN_PRODUCT_SUCCESS, payload: data.products });
   } catch (error) {
@@ -159,7 +163,9 @@ export const getProductDetails = (id) => async (dispatch) => {
       type: PRODUCT_DETAILS_REQUESTS,
     });
 
-    const { data } = await axios.get(`${backendURL}/api/v1/product/${id}`);
+    const { data } = await axios.get(`${backendURL}/api/v1/product/${id}`, {
+      withCredentials: true,
+    });
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,

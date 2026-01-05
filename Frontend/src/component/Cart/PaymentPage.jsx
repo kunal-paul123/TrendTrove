@@ -26,7 +26,9 @@ function PaymentPage() {
 
     const {
       data: { key },
-    } = await axios.get(`${backendURL}/api/v1/getkey`);
+    } = await axios.get(`${backendURL}/api/v1/getkey`, {
+      withCredentials: true,
+    });
 
     const {
       data: { order },
