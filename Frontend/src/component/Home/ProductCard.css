@@ -1,0 +1,17 @@
+@media (max-width: 600px) {
+  .MuiRating-icon {
+    font-size: 1.2rem !important;
+  }
+
+  .productCard > div > span {
+    font-size: 1rem;
+  }
+
+  .productCard > div {
+    display: flex;
+  }
+
+  .productCard > .price {
+    font-size: 1rem;
+  }
+}

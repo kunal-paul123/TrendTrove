@@ -1,0 +1,256 @@
+/* .myOrdersPage {
+  width: 100vw;
+  max-width: 100%;
+  padding: 0 7vmax;
+  box-sizing: border-box;
+  background-color: rgb(235, 235, 235);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.myOrdersHeading {
+  text-align: center;
+  font: 400 1.2vmax "Roboto";
+  padding: 0.5vmax;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  transition: all 0.5s;
+  background-color: rgb(44, 44, 44);
+}
+
+.myOrdersTable {
+  background-color: white;
+}
+
+.myOrdersTable div {
+  font: 300 1vmax "Roboto";
+  border: none;
+}
+
+.myOrdersTable a {
+  color: rgba(0, 0, 0, 0.527);
+  transition: all 0.5s;
+}
+
+.myOrdersTable a:hover {
+  color: #000;
+}
+
+.MuiDataGrid-columnHeader {
+  background-color: #000;
+  padding: 1vmax !important;
+}
+
+.MuiDataGrid-columnHeader div {
+  color: rgb(255, 255, 255);
+  font: 500 1.1vmax "Roboto" !important;
+}
+
+.MuiDataGrid-menuIcon {
+  display: none !important;
+}
+
+@media screen and (max-width: 600px) {
+  .myOrdersPage {
+    padding: 0;
+    height: 93vh;
+  }
+
+  #myOrdersHeading {
+    font: 400 2.2vmax "Roboto";
+    padding: 4vw;
+  }
+
+  .myOrdersTable div {
+    font: 300 4vw "Roboto";
+  }
+
+  .MuiDataGrid-columnHeader {
+    padding: 20px !important;
+  }
+
+  .MuiDataGrid-columnHeader div {
+    font: 500 5vw "Roboto" !important;
+  }
+} */
+
+/* 
+.myOrdersPage {
+  width: 100%;
+  padding: 2rem 1rem;
+  background-color: rgb(235, 235, 235);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.myOrdersHeading {
+  text-align: center;
+  font: 600 1.5rem "Roboto";
+  margin-bottom: 1rem;
+  color: white;
+  background-color: #2c2c2c;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.orderCard {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.orderCard p {
+  margin: 0.3rem 0;
+  font: 400 1rem "Roboto";
+}
+
+.orderLink {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.8rem;
+  color: #1976d2;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.orderLink:hover {
+  text-decoration: underline;
+}
+
+.greenColor {
+  color: green;
+  font-weight: 600;
+}
+
+.redColor {
+  color: red;
+  font-weight: 600;
+} */
+
+/* Responsive */
+/* @media screen and (max-width: 600px) {
+  .myOrdersHeading {
+    font-size: 5vw;
+  }
+
+  .orderCard p {
+    font-size: 4.2vw;
+  }
+
+  .orderLink {
+    font-size: 4vw;
+  }
+} */
+
+.myOrdersPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.myOrdersHeading {
+  text-align: center;
+  font: 600 1.3rem "Roboto", sans-serif;
+  color: #fff;
+  background: #212121;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin: 1rem auto;
+  width: fit-content;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
+}
+
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.orderCard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.orderCard:hover {
+  transform: scale(1.02);
+}
+
+.orderCard p {
+  margin: 0.5rem 0;
+  font: 400 1rem "Roboto", sans-serif;
+  color: #333;
+}
+
+.orderCard strong {
+  color: #555;
+}
+
+.orderLink {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #1976d2;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.orderLink:hover {
+  color: #125ea5;
+  text-decoration: underline;
+}
+
+.greenColor {
+  color: green;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.redColor {
+  color: red;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.no-orders {
+  text-align: center;
+  color: #777;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .myOrdersHeading {
+    margin-top: -15px;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .orderCard {
+    padding: 1rem;
+  }
+
+  .orderCard p {
+    font-size: 0.95rem;
+  }
+
+  .orderLink {
+    font-size: 0.95rem;
+  }
+}

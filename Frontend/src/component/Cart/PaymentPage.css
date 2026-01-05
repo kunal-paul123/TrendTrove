@@ -1,0 +1,16 @@
+.paymentpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12rem;
+  margin-bottom: 11rem;
+}
+
+.payment {
+  padding: 10px 40px;
+  font-size: 25px;
+  border-radius: 55px;
+  cursor: pointer;
+  background-color: #000000;
+  color: #fff;
+}
