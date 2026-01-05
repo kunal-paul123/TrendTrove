@@ -21,8 +21,8 @@ database();
 //start the server
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(process.env.PORT, () => {
-  console.log(`server is working on http://localhost:${process.env.PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`server is working on http://localhost:${PORT}`);
 });
 
 //unhaldled promise rejaction
