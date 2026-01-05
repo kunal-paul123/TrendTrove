@@ -7,7 +7,18 @@ const dotenv = require("dotenv");
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: (origin, callback) => {
+      const allowedOrigin = process.env.FRONTEND_URL;
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      // Check if origin matches allowed origin (ignoring trailing slash)
+      if (allowedOrigin.trim().replace(/\/$/, "") === origin.replace(/\/$/, "")) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
