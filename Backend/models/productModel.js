@@ -19,18 +19,17 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  images: [
-    {
-      public_id: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
+  images:
+  {
+    key: {
+      type: String,
+      required: true,
     },
-  ],
+    fileUrl: {
+      type: String,
+      required: true,
+    }
+  },
   category: {
     type: String,
     required: [true, "Please Enter Category"],

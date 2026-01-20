@@ -1,2 +1,8 @@
 config/config.env
 node_modules
+
+private_key.pem
+public_key.pem
+
+aws_s3_plan.md
+

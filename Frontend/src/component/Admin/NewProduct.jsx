@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { clearErrors, createProduct } from "../../Actions/productAction";
 import { useNavigate } from "react-router-dom";
 import { NEW_PRODUCT_RESET } from "../../Constants/productConstants";
+import uploadTos3 from "../../../helper/uploadTos3";
 import "./newProduct.css";
 
 function NewProduct() {
@@ -26,8 +27,8 @@ function NewProduct() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState();
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   let categories = [
     "Mobile",
@@ -53,40 +54,42 @@ function NewProduct() {
     }
   }, [error, success, navigate, toast, dispatch]);
 
-  const createFormSubmitHandler = (e) => {
+  const createFormSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const myForm = new FormData();
+    if (!image) {
+      toast.error("Please Upload Image");
+      return;
+    }
 
-    myForm.set("name", name);
-    myForm.set("price", price);
-    myForm.set("description", description);
-    myForm.set("category", category);
-    myForm.set("stock", stock);
+    const uploadImage = await uploadTos3(image);
 
-    images.forEach((image) => {
-      myForm.append("images", image);
-    });
+    const productData = {
+      name,
+      price,
+      description,
+      category,
+      stock,
+      images: uploadImage,
+    };
 
-    console.log([...myForm.entries()]);
-    dispatch(createProduct(myForm));
+    dispatch(createProduct(productData));
   };
 
   const createProductImagesChange = (e) => {
-    const files = Array.from(e.target.files);
+    if (!e.target.files || e.target.files.length === 0) return;
+    const file = e.target.files[0];
 
-    files.forEach((file) => {
-      const reader = new FileReader();
+    setImage(file);
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((old) => [...old, reader.result]);
-          setImages((old) => [...old, reader.result]);
-        }
-      };
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImagePreview(reader.result)
+      }
+    };
 
-      reader.readAsDataURL(file);
-    });
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -171,14 +174,13 @@ function NewProduct() {
                 name="images"
                 accept="image/*"
                 onChange={createProductImagesChange}
-                multiple
               />
             </div>
 
             <div className="createProductFormImage">
-              {imagesPreview.map((image, index) => {
-                return <img key={index} src={image} alt="Product preview" />;
-              })}
+              {imagePreview && (
+                <img src={imagePreview} alt="Product Preview" />
+              )}
             </div>
 
             <Button
@@ -188,6 +190,7 @@ function NewProduct() {
             >
               Create
             </Button>
+
           </form>
         </div>
       </div>

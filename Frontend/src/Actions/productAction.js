@@ -30,33 +30,33 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
 //get all products
 export const getProducts =
   (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
-  async (dispatch) => {
-    try {
-      dispatch({
-        type: ALL_PRODUCT_REQUESTS,
-      });
+    async (dispatch) => {
+      try {
+        dispatch({
+          type: ALL_PRODUCT_REQUESTS,
+        });
 
-      let link = `${backendURL}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+        let link = `${backendURL}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
-      if (category) {
-        link = `${backendURL}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+        if (category) {
+          link = `${backendURL}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+        }
+
+        const { data } = await axios.get(link, {
+          withCredentials: true,
+        });
+
+        dispatch({
+          type: ALL_PRODUCT_SUCCESS,
+          payload: data,
+        });
+      } catch (error) {
+        dispatch({
+          type: ALL_PRODUCT_FAIL,
+          payload: error.response.data.message,
+        });
       }
-
-      const { data } = await axios.get(link, {
-        withCredentials: true,
-      });
-
-      dispatch({
-        type: ALL_PRODUCT_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: ALL_PRODUCT_FAIL,
-        payload: error.response.data.message,
-      });
-    }
-  };
+    };
 
 //get All products for admin
 export const getAdminProducts = () => async (dispatch) => {
@@ -81,7 +81,7 @@ export const createProduct = (productData) => async (dispatch) => {
     });
 
     const config = {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { "Content-Type": "application/json" },
     };
 
     const { data } = await axios.post(

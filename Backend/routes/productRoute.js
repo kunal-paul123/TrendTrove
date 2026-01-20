@@ -25,7 +25,6 @@ router
   .post(
     isAuthenticatedUser,
     authorizeRoles("admin"),
-    upload.array("images", 5),
     createProduct
   );
 
