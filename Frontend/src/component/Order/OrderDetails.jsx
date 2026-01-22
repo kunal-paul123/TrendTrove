@@ -7,6 +7,7 @@ import { NavLink, useParams } from "react-router-dom";
 import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
 import Typography from "@mui/material/Typography";
+import ConfirmOrderPageImage from "../Cart/ConfirmOrderPageImage";
 
 function OrderDetails() {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
@@ -99,7 +100,7 @@ function OrderDetails() {
                 {order.orderItems &&
                   order.orderItems.map((item) => (
                     <div key={item.product}>
-                      <img src={item.image} alt="Product" />
+                      <ConfirmOrderPageImage imageKey={item.image} altName={item.name} />
                       <NavLink to={`/product/${item.product}`}>
                         {item.name}
                       </NavLink>{" "}

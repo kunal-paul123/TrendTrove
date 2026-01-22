@@ -19,6 +19,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Rating from "@mui/material/Rating";
 import { NEW_REVIEW_RESET } from "../../Constants/productConstants";
+import useSignedImage from "../../hooks/useSignedImage";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -85,6 +86,8 @@ function ProductDetails() {
       : setQuantity(product.stock);
   };
 
+  const { imageUrl } = useSignedImage(product.images?.key);
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -113,15 +116,13 @@ function ProductDetails() {
           <MetaData title={`${product.name}...Ecommerce`} />
           <div className="productDetails">
             <div>
-              {product.images &&
-                product.images.map((item, i) => (
-                  <img
-                    className="CarouselImage"
-                    key={item.url}
-                    src={item.url}
-                    alt={`${i} Slide`}
-                  />
-                ))}
+              {imageUrl &&
+                <img
+                  className="CarouselImage"
+                  src={imageUrl}
+                  alt={product.name}
+                />
+              }
             </div>
 
             <div>

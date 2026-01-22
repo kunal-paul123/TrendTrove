@@ -5,6 +5,7 @@ import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
 import Typography from "@mui/material/Typography";
 import { NavLink, useNavigate } from "react-router-dom";
+import ConfirmOrderPageImage from "./ConfirmOrderPageImage";
 
 function ConfirmOrder() {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
@@ -68,7 +69,7 @@ function ConfirmOrder() {
                 {cartItems &&
                   cartItems.map((item) => (
                     <div key={item.product}>
-                      <img src={item.image} alt="product" />
+                      <ConfirmOrderPageImage imageKey={item.image} altName={item.name} />
                       <NavLink to={`/product/${item.product}`}>
                         {item.name}
                       </NavLink>

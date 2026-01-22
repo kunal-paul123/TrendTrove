@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import "./ProductCard.css";
-import { useEffect, useState } from "react";
+import useSignedImage from "../../hooks/useSignedImage";
 
 function ProductCard(product) {
   const options = {
@@ -11,22 +11,7 @@ function ProductCard(product) {
     readOnly: true,
   };
 
-  const [imageUrl, setImageUrl] = useState("");
-
-  useEffect(() => {
-    const fetchSignedUrl = async () => {
-      try {
-        if (!product.images?.key) return;
-
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/image/signed-url/?key=${product.images?.key}`);
-        const data = await res.json();
-        setImageUrl(data.url);
-      } catch (error) {
-        console.log("failed to fetch signed url: ", error);
-      }
-    }
-    fetchSignedUrl();
-  }, [product.images?.key]);
+  const { imageUrl } = useSignedImage(product.images?.key);
 
   return (
     <NavLink className="productCard" to={`/product/${product._id}`}>
