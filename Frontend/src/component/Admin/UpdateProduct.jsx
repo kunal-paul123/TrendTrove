@@ -17,6 +17,8 @@ import {
 } from "../../Actions/productAction";
 import { useNavigate } from "react-router-dom";
 import { UPDATE_PRODUCT_RESET } from "../../Constants/productConstants";
+import useSignedImage from "../../hooks/useSignedImage";
+import uploadTos3 from "../../../helper/uploadTos3";
 
 function Updateproduct() {
   const { error, product } = useSelector((state) => state.productDetails);
@@ -38,9 +40,9 @@ function Updateproduct() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState();
-  const [images, setImages] = useState([]);
-  const [oldImages, setOldImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
+  const [images, setImages] = useState(null);
+  const [oldImages, setOldImages] = useState(null);
+  const [imagesPreview, setImagesPreview] = useState(null);
 
   let categories = [
     "Mobile",
@@ -53,6 +55,8 @@ function Updateproduct() {
     "Smartphones",
   ];
 
+  const { imageUrl } = useSignedImage(product.images?.key);
+
   useEffect(() => {
     if (product && product._id !== id) {
       dispatch(getProductDetails(id));
@@ -62,7 +66,7 @@ function Updateproduct() {
       setPrice(product.price);
       setCategory(product.category);
       setStock(product.stock);
-      setOldImages(product.images);
+      setOldImages(imageUrl);
     }
 
     if (isUpdated) {
@@ -82,43 +86,32 @@ function Updateproduct() {
     }
   }, [error, isUpdated, navigate, toast, dispatch, id, product, updateError]);
 
-  const updateProductHandler = (e) => {
+  const updateProductHandler = async (e) => {
     e.preventDefault();
 
-    const myForm = new FormData();
+    const uploadImage = await uploadTos3(images);
 
-    myForm.set("name", name);
-    myForm.append("price", price);
-    myForm.set("description", description);
-    myForm.set("category", category);
-    myForm.set("stock", stock);
+    const productData = {
+      name, price, description, category, stock, images: uploadImage,
+    };
 
-    images.forEach((image) => {
-      myForm.append("images", image);
-    });
-
-    dispatch(updateProduct(id, myForm));
+    dispatch(updateProduct(id, productData));
   };
 
   const updateProductImagesChange = (e) => {
-    const files = Array.from(e.target.files);
+    const file = e.target.files[0];
 
-    setImages([]);
-    setImagesPreview([]);
-    setOldImages([]);
+    setImages(file);
+    setImagesPreview(null);
+    setOldImages(null);
 
-    files.forEach((file) => {
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((old) => [...old, reader.result]);
-          setImages((old) => [...old, reader.result]);
-        }
-      };
-
-      reader.readAsDataURL(file);
-    });
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImagesPreview(reader.result);
+      }
+    }
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -211,17 +204,10 @@ function Updateproduct() {
             </div>
 
             <div className="createProductFormImage">
-              {oldImages &&
-                oldImages.map((image, index) => {
-                  return (
-                    <img key={index} src={image.url} alt="Product preview" />
-                  );
-                })}
+              {oldImages && <img src={oldImages} alt="Product preview" />}
             </div>
             <div className="createProductFormImage">
-              {imagesPreview.map((image, index) => {
-                return <img key={index} src={image} alt="Product preview" />;
-              })}
+              {imagesPreview && <img src={imagesPreview} alt="Product preview" />}
             </div>
 
             <Button
