@@ -20,6 +20,7 @@ TrendTrove is a full-stack E-Commerce application built with React.js, Node.js, 
 - **Payment Gateway**: Razorpay
 - **Image Storage**: AWS S3
 - **CDN**: CloudFront
+- **Deployment**: AWS EC2
 
 ### Backend Setup
 
@@ -89,8 +90,3 @@ TrendTrove is a full-stack E-Commerce application built with React.js, Node.js, 
    ```bash
    npm run dev
    ```
-
-## Deployment
-
-- **Backend**: Configured for deployment on Render.
-- **Frontend**: Configured for deployment on Vercel.
